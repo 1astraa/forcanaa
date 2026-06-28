@@ -114,13 +114,24 @@
         }
         .memory-card.flipped { background-color: white; color: initial; cursor: default; border: 2px solid var(--maroon); }
         
-        #catch-game-area {
-            width: 100%; height: 200px; border: 2px dashed var(--maroon); border-radius: 15px;
-            position: relative; overflow: hidden; margin-bottom: 20px;
+        /* Slide 5 New Game Styles */
+        #clicker-game-area {
+            display: flex; flex-direction: column; align-items: center; justify-content: center; margin-bottom: 20px; width: 100%;
         }
-        #catch-item {
-            font-size: 40px; position: absolute; top: 50%; left: 50%;
-            cursor: pointer; transition: 0.2s; user-select: none;
+        #heart-btn {
+            font-size: 60px; cursor: pointer; user-select: none; transition: transform 0.1s; animation: pulse 1.5s infinite;
+        }
+        #heart-btn:active { transform: scale(0.8); }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        .progress-box {
+            width: 80%; background-color: rgba(255, 255, 255, 0.6); border: 2px solid var(--maroon); border-radius: 20px; height: 20px; margin-top: 15px; overflow: hidden; position: relative;
+        }
+        .progress-fill {
+            width: 0%; height: 100%; background-color: var(--maroon); transition: width 0.2s;
         }
 
         /* Cards Slide */
@@ -180,10 +191,13 @@
     </div>
 
     <div class="slide" id="slide5">
-        <h2>Tangkap Bunganya! 🌸</h2>
-        <p>Klik bunga yang lari-lari ini sebanyak 3 kali ya!</p>
-        <div id="catch-game-area">
-            <div id="catch-item" onmouseover="moveItem()" onclick="catchItem()">🌸</div>
+        <h2>Kirim Energi buat Astra! 💖</h2>
+        <p>Klik hatinya sampai penuh (10 kali) untuk mengisi daya semangat Astra!</p>
+        <div id="clicker-game-area">
+            <div id="heart-btn" onclick="clickHeart()">💖</div>
+            <div class="progress-box">
+                <div class="progress-fill" id="progress-fill"></div>
+            </div>
         </div>
         <button id="btn5" style="display: none;" onclick="nextSlide(6)">Lanjut!</button>
     </div>
@@ -199,11 +213,11 @@
     <div class="slide" id="slide7">
         <h2>My First Impression to You</h2>
         <div class="impression-cards">
-            <div class="imp-card" onclick="flipImp(this, 'kalem (ternyata anomali cik)')">?</div>
-            <div class="imp-card" onclick="flipImp(this, '"jusfren nya kiel??"')">?</div>
+            <div class="imp-card" onclick="flipImp(this, 'kalem (ytta)')">?</div>
+            <div class="imp-card" onclick="flipImp(this, '&quot;jusfren nya kiel??&quot;')">?</div>
             <div class="imp-card" onclick="flipImp(this, 'Baik betul anjir')">?</div>
-            <div class="imp-card" onclick="flipImp(this, 'asbun, ada aja jawabannya')">?</div>
-            <div class="imp-card" onclick="flipImp(this, 'gua tau ni orang bakal jadi biefef gue')">?</div>
+            <div class="imp-card" onclick="flipImp(this, 'asbun')">?</div>
+            <div class="imp-card" onclick="flipImp(this, '"gua tau ni orang bakal jadi biefef gue"')">?</div>
         </div>
         <button id="btn7" style="display: none;" onclick="nextSlide(8)">Next</button>
     </div>
@@ -220,7 +234,7 @@
 
     <div class="slide" id="slide9">
         <div class="letter-box">
-            <h2 style="text-align: left; margin-top:0;">Deskripsi untuk<span id="display-name">cana</span></h2>
+            <h2 style="text-align: left; margin-top:0;">Deskripsi untuk <span id="display-name">cana</span></h2>
             <p>Hai cana sayaaanggg.</p>
             <p>Gua gatau dunia apa yang sedang lu laluin, tapi semangat terus ya!</p>
             <p>astramu ini akan selalu ada jika dirimu butuh apa apa (telfon aja pls hp gua dnd), mari kita lewati dunia yang sangat jahat dan ga ngotak ini. semoga lu dan gua selalu dikelilingi hal-hal baik, dan please tetep jadi diri lu yang sekarang. karena orang sebaik lu pantas dapet hal-hal baik juga. jangan biarin dunia bikin lu berubah jadi orang yang ga lagi ngenalin diri sendiri. gue tau hidup ga selalu adil, bakal ada banyak hari yang bikin capek, kecewa, bahkan ngerasa semuanya ga masuk akal. tapi gue harap itu ga pernah ngambil semua cahaya yang ada di diri lu. tetap jadi orang yang tulus, tetap jadi orang yang peduli sama sekitar, dan tetap jadi diri lu, meskipun dunia kadang ga ngebales kebaikan dengan baik. semoga semua hal yang bikin hati lu tenang selalu nemuin jalan buat balik ke hidup lu. dan semoga suatu saat nanti, semua hal yang lagi lu perjuangin bisa bener-bener jadi kenyataan.</p>
@@ -336,24 +350,19 @@
         }
         loadQ();
 
-        // Slide 5: Catch Game
-        let catchCount = 0;
-        function moveItem() {
-            let item = document.getElementById('catch-item');
-            let area = document.getElementById('catch-game-area');
-            let maxX = area.clientWidth - 50;
-            let maxY = area.clientHeight - 50;
-            item.style.left = Math.random() * maxX + 'px';
-            item.style.top = Math.random() * maxY + 'px';
-        }
-        function catchItem() {
-            catchCount++;
-            if (catchCount >= 3) {
-                document.getElementById('catch-item').style.display = 'none';
-                document.getElementById('catch-game-area').innerHTML = "<h3 style='color:var(--maroon); line-height:200px;'>Dapat! 🌸</h3>";
+        // Slide 5: Heart Clicker Game
+        let clickCount = 0;
+        const maxClicks = 10;
+        function clickHeart() {
+            if (clickCount >= maxClicks) return;
+            clickCount++;
+            let percentage = (clickCount / maxClicks) * 100;
+            document.getElementById('progress-fill').style.width = percentage + '%';
+            
+            if (clickCount >= maxClicks) {
+                document.getElementById('heart-btn').style.animation = 'none';
+                document.getElementById('heart-btn').innerHTML = "🥰🌸";
                 document.getElementById('btn5').style.display = 'inline-block';
-            } else {
-                moveItem();
             }
         }
 
