@@ -143,6 +143,33 @@
             font-size: 14px; transition: 0.5s; box-sizing: border-box;
         }
         .imp-card.flipped { background-color: white; color: var(--maroon); border: 1px solid var(--maroon); }
+
+        /* Styles untuk Slide Foto & Cerita Baru */
+        .photo-frame {
+            background: white;
+            padding: 12px;
+            padding-bottom: 30px;
+            box-shadow: 0 8px 16px rgba(128, 0, 0, 0.15);
+            border-radius: 4px;
+            margin-bottom: 20px;
+            transform: rotate(-2deg);
+            transition: 0.3s;
+        }
+        .photo-frame:hover {
+            transform: rotate(0deg) scale(1.02);
+        }
+        .story-img {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border: 1px solid #ddd;
+        }
+        .story-text {
+            max-width: 85%;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            font-size: 15px;
+        }
         
         /* Letters */
         .letter-box {
@@ -222,17 +249,32 @@
         <button id="btn7" style="display: none;" onclick="nextSlide(8)">Next</button>
     </div>
 
+    <!-- SLIDE BARU: FOTO DAN CERITA -->
     <div class="slide" id="slide8">
+        <h2>How We First Met ☕✨</h2>
+        <div class="photo-frame">
+            <!-- Ganti 'foto_teman.jpg' dengan file gambar mukanya -->
+            <img src="foto_teman.jpg" alt="Our Memory" class="story-img">
+        </div>
+        <p class="story-text">
+            Inget banget dulu awal mula kita bisa saling kenal tuh pas <b>[Tulis momen di sini, misal: awal masuk sekolah / di suatu acara / lewat sosmed]</b>. 
+            Awalnya ngira kamu orangnya <i>[jaim / diem / galak]</i>, eh ternyata setelah ngobrol lama-lama malah se-freak dan se-seru ini! 
+            Dari situlah cerita kita dimulai sampai akhirnya bisa sedekat sekarang.
+        </p>
+        <button onclick="nextSlide(9)">Next</button>
+    </div>
+
+    <div class="slide" id="slide9">
         <h2>Coba deskripsiin gua(astra)!💌</h2>
         <p>Tulis pesan rahasia disini ya:</p>
         <a href="https://ngl.link/astrasayang" target="_blank" style="text-decoration: none;">
             <button style="background-color: #e83e8c; margin-bottom: 20px;">NGL Link</button>
         </a>
         <br>
-        <button onclick="nextSlide(9)">Next</button>
+        <button onclick="nextSlide(10)">Next</button>
     </div>
 
-    <div class="slide" id="slide9">
+    <div class="slide" id="slide10">
         <div class="letter-box">
             <h2 style="text-align: left; margin-top:0;">Deskripsi untuk <span id="display-name">cana</span></h2>
             <p>Hai cana sayaaanggg.</p>
@@ -240,20 +282,20 @@
             <p>astramu ini akan selalu ada jika dirimu butuh apa apa (telfon aja pls hp gua dnd), mari kita lewati dunia yang sangat jahat dan ga ngotak ini. semoga lu dan gua selalu dikelilingi hal-hal baik, dan please tetep jadi diri lu yang sekarang. karena orang sebaik lu pantas dapet hal-hal baik juga. jangan biarin dunia bikin lu berubah jadi orang yang ga lagi ngenalin diri sendiri. gue tau hidup ga selalu adil, bakal ada banyak hari yang bikin capek, kecewa, bahkan ngerasa semuanya ga masuk akal. tapi gue harap itu ga pernah ngambil semua cahaya yang ada di diri lu. tetap jadi orang yang tulus, tetap jadi orang yang peduli sama sekitar, dan tetap jadi diri lu, meskipun dunia kadang ga ngebales kebaikan dengan baik. semoga semua hal yang bikin hati lu tenang selalu nemuin jalan buat balik ke hidup lu. dan semoga suatu saat nanti, semua hal yang lagi lu perjuangin bisa bener-bener jadi kenyataan.</p>
             <p>&Love from astra</p>
         </div>
-        <button onclick="nextSlide(10)">Next</button>
+        <button onclick="nextSlide(11)">Next</button>
     </div>
 
-    <div class="slide" id="slide10">
+    <div class="slide" id="slide11">
         <div class="letter-box">
             <h2 style="text-align: left; margin-top:0;">MOST IMPORTANT</h2>
             <p>makasih ya sudah mau jadi temen gua, i really really hope our friendships last long!</p>
             <p>terima kasih udah milih buat tetap jadi temen gue sampai hari ini. mungkin gue ga selalu nunjukin, tapi gue bener-bener menghargai semua waktu, perhatian, dan kebaikan yang udah lu kasih. semoga nanti gue juga bisa jadi temen yang sama baiknya buat lu.</p>
             <p>you're really important for me and for everyone else!</p>
         </div>
-        <button onclick="nextSlide(11)">Next</button>
+        <button onclick="nextSlide(12)">Next</button>
     </div>
 
-    <div class="slide" id="slide11">
+    <div class="slide" id="slide12">
         <h1 style="font-size: 3em;">Terimakasih sudah bertahan!</h1>
         <p>Astra loves you!</p>
     </div>
